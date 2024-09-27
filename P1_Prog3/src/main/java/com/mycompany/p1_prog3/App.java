@@ -1,24 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.p1_prog3;
 
-/**
- *
- * @author peanj
- */
+import com.mycompany.p1_prog3.GUI.Tela_Login;
 
-import javax.swing.*;
-
-public class App {
+public class Main {
 
     public static void main(String[] args) {
-        GuiMenu guiMenu = new GuiMenu();
-        JFrame frame = new JFrame("Menu");
-        frame.setContentPane(guiMenu.JPMenu);
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        // Inicializar a interface de login
+        Tela_Login telaLogin = new Tela_Login();
+        telaLogin.setVisible(true);  // Exibir a tela de login
+        
+        // O que fazer após o login bem-sucedido pode ser colocado aqui.
+        // Isso pode incluir carregar a tela principal do sistema ou continuar a execução.
     }
 }
