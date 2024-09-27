@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.p1_prog3.GUI;
 
 import javax.swing.JOptionPane;
@@ -12,9 +8,6 @@ import javax.swing.table.DefaultTableModel;
  * @author peanj
  */
 public class Tela_Cadastro extends javax.swing.JFrame {
-    
-    Escolha_ADMIN.add("Sim");
-    choiceAdmin.add("Não");
 
     /**
      * Creates new form Tela_Cadastro
@@ -58,6 +51,10 @@ public class Tela_Cadastro extends javax.swing.JFrame {
 
         jLabel5.setText("USUÁRIO ADMIN?");
 
+        // Adiciona opções para a escolha de Admin
+        Escolha_ADMIN.add("Sim");
+        Escolha_ADMIN.add("Não");
+
         Criar_Cadastro.setText("CADASTRAR");
         Criar_Cadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,8 +71,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
                 Inserir_UsuarioActionPerformed(evt);
             }
         });
-
-        Escolha_ADMIN.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,14 +136,11 @@ public class Tela_Cadastro extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        Escolha_ADMIN.getAccessibleContext().setAccessibleName("");
-        Escolha_ADMIN.getAccessibleContext().setAccessibleDescription("");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void Criar_CadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Criar_CadastroActionPerformed
-         String Nome_Completo = Inserir_Nome.getText();
+        String Nome_Completo = Inserir_Nome.getText();
         String Usuario = Inserir_Usuario.getText();
         char[] senhaCharArray = Inserir_Senha.getPassword();  // Obtém a senha como char[]
         String Senha = new String(senhaCharArray);  // Converte para String
@@ -158,17 +150,34 @@ public class Tela_Cadastro extends javax.swing.JFrame {
 
         boolean isAdmin = escolhaAdmin.equals("Sim");  // Verifica se a escolha foi "Sim"
 
+        // Validação de campos
         if (Nome_Completo.isEmpty() || Usuario.isEmpty() || Senha.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor preencha todos os campos", "Tente outra vez", JOptionPane.ERROR_MESSAGE);
-        } else {
-            DefaultTableModel model = (DefaultTableModel) Tabela_Usuarios.getModel();
-            // Adiciona o usuário à tabela, indicando se é Admin ou Comum
-            model.addRow(new Object[]{Nome_Completo, Usuario, Senha, isAdmin ? "Admin" : "Comum"});  
+            return;
         }
 
+        // Validação da senha
+        if (Senha.length() < 8) {
+            JOptionPane.showMessageDialog(this, "A senha deve ter no mínimo 8 caracteres", "Tente outra vez", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Verifica se o usuário já está na tabela para evitar duplicação
+        DefaultTableModel model = (DefaultTableModel) Tabela_Usuarios.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 1).equals(Usuario)) {
+                JOptionPane.showMessageDialog(this, "Usuário já existe", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // Adiciona o usuário à tabela, indicando se é Admin ou Comum
+        model.addRow(new Object[]{Nome_Completo, Usuario, Senha, isAdmin ? "Admin" : "Comum"});  
+
+        // Limpa os campos após o cadastro
         Inserir_Nome.setText("");
         Inserir_Usuario.setText("");
-        Inserir_Senha.setText("");  // Limpa o campo da senhar_Senha.setText("");  // Limpa o campo da senha
+        Inserir_Senha.setText("");  // Limpa o campo da senha
     }//GEN-LAST:event_Criar_CadastroActionPerformed
 
     private void Inserir_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inserir_UsuarioActionPerformed
@@ -180,30 +189,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tela_Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tela_Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tela_Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tela_Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Tela_Cadastro().setVisible(true);
