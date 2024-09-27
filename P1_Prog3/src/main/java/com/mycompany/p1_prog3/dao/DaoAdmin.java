@@ -1,4 +1,4 @@
-import br.edu.femass.models.Admin;
+import com.mycompany.p1_prog3.model.Admin;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.io.FileInputStream;
