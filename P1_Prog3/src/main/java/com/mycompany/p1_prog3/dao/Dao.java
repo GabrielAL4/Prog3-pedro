@@ -8,6 +8,8 @@ package com.mycompany.p1_prog3.dao;
  *
  * @author peanj
  */
-public interface Dao {
-    
+public interface Dao<T> {
+    public void save(T object) throws Exception;
+
+    public List<T> getAll() throws Exception;
 }
