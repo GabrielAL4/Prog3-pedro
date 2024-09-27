@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.mycompany.p1_prog3.dao;
 
-/**
- *
- * @author peanj
- */
 import com.mycompany.p1_prog3.model.Admin;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -17,27 +9,38 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoAdmin extends Persistencia<Admin> implements Dao<Admin>{
+public class DaoAdmin extends Persistencia<Admin> implements Dao<Admin> {
     private final static String NOMEARQUIVO = "Admins.json";
+
     @Override
-    public void save(Admin Admin) throws Exception {
-        List<Admin> Admins = getAll();
-        Admins.add(Admin);
-        String json = getObjectmapper().writerWithDefaultPrettyPrinter().writeValueAsString(Admins);
-        FileOutputStream out = new FileOutputStream(NOMEARQUIVO);
-        out.write(json.getBytes());
-        out.close();
+    public void save(Admin admin) throws Exception {
+        List<Admin> admins = getAll();
+        admins.add(admin);
+        String json = getObjectmapper().writerWithDefaultPrettyPrinter().writeValueAsString(admins);
+        try (FileOutputStream out = new FileOutputStream(NOMEARQUIVO)) {
+            out.write(json.getBytes());
+        }
     }
+
     @Override
     public List<Admin> getAll() throws Exception {
         try {
             FileInputStream in = new FileInputStream(NOMEARQUIVO);
             String json = new String(in.readAllBytes());
-            List<Admin> Admins = getObjectmapper().readValue(json, new TypeReference<List<Admin>>() {
-            });
-            return Admins;
+            return getObjectmapper().readValue(json, new TypeReference<List<Admin>>() {});
         } catch (FileNotFoundException f) {
-            return new ArrayList();
+            return new ArrayList<>();
         }
+    }
+
+    // Método para buscar um administrador pelo nome de usuário
+    public Admin getAdminByUsername(String username) throws Exception {
+        List<Admin> admins = getAll();
+        for (Admin admin : admins) {
+            if (admin.getUsername().equals(username)) {
+                return admin;
+            }
+        }
+        return null; // Retorna null se não encontrar
     }
 }

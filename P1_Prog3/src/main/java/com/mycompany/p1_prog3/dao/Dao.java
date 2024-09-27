@@ -4,6 +4,8 @@
  */
 package com.mycompany.p1_prog3.dao;
 
+import java.util.List;
+
 /**
  *
  * @author peanj

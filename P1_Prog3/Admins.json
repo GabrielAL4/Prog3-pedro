@@ -1,0 +1,19 @@
+[ {
+  "nomeCompleto" : "Admin",
+  "username" : "admin",
+  "senha" : "admin",
+  "dataCadastro" : 1727450613234,
+  "isAdmin" : true
+}, {
+  "nomeCompleto" : "teste",
+  "username" : "teste",
+  "senha" : "12345678",
+  "dataCadastro" : 1727451320839,
+  "isAdmin" : true
+}, {
+  "nomeCompleto" : "testecomum",
+  "username" : "testecomum",
+  "senha" : "12345678",
+  "dataCadastro" : 1727451347014,
+  "isAdmin" : true
+} ]

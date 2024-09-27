@@ -2,7 +2,7 @@ package com.mycompany.p1_prog3;
 
 import com.mycompany.p1_prog3.GUI.Tela_Login;
 
-public class Main {
+public class App {
 
     public static void main(String[] args) {
         // Inicializar a interface de login
