@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.p1_prog3.model;
 
 import java.util.Date;
 
-/**
- *
- * @author peanj
- */
-public class UsuarioComum extends Usuario{
+public class UsuarioComum extends Usuario {
 
+    // O construtor de UsuarioComum deve sempre definir isAdmin como false
     public UsuarioComum(String nomeCompleto, String username, String senha, Date dataCadastro) {
-        super(nomeCompleto, username, senha, dataCadastro);
+        super(nomeCompleto, username, senha, dataCadastro, false);  // Passa 'false' para isAdmin
     }
-
     
 }
