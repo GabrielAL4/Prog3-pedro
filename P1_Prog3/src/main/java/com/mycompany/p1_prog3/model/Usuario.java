@@ -13,14 +13,19 @@ public class Usuario {
     private Date dataCadastro;
 
     // Construtor
-    public Usuario(String nomeCompleto, String username, String senha, Date dataCadastro) {
+    public Usuario(String nomeCompleto, String username, String senha, Date dataCadastro, boolean isAdmin) {
         this.nome_Completo = nomeCompleto;
         this.usuario = username;
         this.senha = senha;
         this.dataCadastro = dataCadastro;
+        this.isAdmin = isAdmin;
     }
 
     // Getters e setters
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+    
     public String getUsername() {
         return usuario;
     }
@@ -31,6 +36,9 @@ public class Usuario {
 
     public Date getDataCadastro() {
         return dataCadastro;
+    }
+    public boolean getIsAdmin() {
+        return isAdmin;
     }
 }
 
