@@ -10,9 +10,9 @@ import java.util.Date;
  *
  * @author peanj
  */
-public class Comum extends Usuario{
+public class UsuarioComum extends Usuario{
 
-    public Comum(String nomeCompleto, String username, String senha, Date dataCadastro) {
+    public UsuarioComum(String nomeCompleto, String username, String senha, Date dataCadastro) {
         super(nomeCompleto, username, senha, dataCadastro);
     }
 
